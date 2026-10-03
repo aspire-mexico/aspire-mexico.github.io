@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan de Estudios · Aspire Leaders Program</title>
+    <meta name="description" content="Conoce el plan de estudios del programa de liderazgo Aspire: 6 semanas, formación integral." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aspire: {
+                            red: '#a32035',
+                            redDark: '#851a2b',
+                            gold: '#fcd116',
+                            goldHover: '#e0b910',
+                            charcoal: '#333132',
+                            slate: '#4b5563',
+                            green: '#008a00',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ===== LOADING PAGE (idéntica a la de index.html) ===== */
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            opacity: 1;
+            visibility: visible;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='%27Playfair Display%27, serif' font-weight='700' font-size='46' fill='%23d1d5db' opacity='0.12'%3EA%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 120px 120px;
+        }
+        #loading-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .spinner-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 12px 40px rgba(163, 32, 53, 0.06);
+        }
+        .spinner-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 6px solid #e5e7eb;
+            border-top-color: #a32035;
+            animation: spin 1s linear infinite;
+        }
+        .spinner-letter {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            color: #a32035;
+            line-height: 1;
+            text-shadow: 0 2px 8px rgba(163, 32, 53, 0.10);
+            z-index: 2;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-message {
+            margin-top: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #4b5563;
+            letter-spacing: 0.02em;
+        }
+        .loading-message .dots::after {
+            content: '';
+            animation: dots 1.4s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0%   { content: ''; }
+            25%  { content: '.'; }
+            50%  { content: '..'; }
+            75%  { content: '...'; }
+            100% { content: ''; }
+        }
+        .loading-delay-msg {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            max-width: 320px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            font-weight: 400;
+        }
+        .loading-delay-msg.show {
+            opacity: 1;
+        }
+
+        /* ===== Estilos propios del plan de estudios (sin cambios) ===== */
+        .section-badge {
+            display: inline-block;
+            background: rgba(163, 32, 53, 0.08);
+            color: #a32035;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid rgba(163, 32, 53, 0.15);
+        }
+        .card-premium {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.3s ease, transform 0.25s ease;
+        }
+        .card-premium:hover {
+            box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.10);
+            transform: translateY(-4px);
+        }
+        .card-premium .card-top-line {
+            height: 4px;
+            border-radius: 1.25rem 1.25rem 0 0;
+            width: 100%;
+            margin-top: -1px;
+        }
+        .card-premium .card-top-line.gold {
+            background: #fcd116;
+        }
+        .card-premium .card-top-line.green {
+            background: #008a00;
+        }
+        .card-hover {
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-up-delay-1 { transition-delay: 0.05s; }
+        .fade-up-delay-2 { transition-delay: 0.10s; }
+        .fade-up-delay-3 { transition-delay: 0.15s; }
+        .fade-up-delay-4 { transition-delay: 0.20s; }
+    </style>
+</head>
+<body class="bg-gray-50 text-aspire-charcoal font-sans antialiased">
+
+    <!-- ===== LOADING PAGE ===== -->
+    <div id="loading-overlay">
+        <div class="spinner-wrapper">
+            <div class="spinner-ring"></div>
+            <span class="spinner-letter">A</span>
+        </div>
+        <p class="loading-message">
+            Cargando<span class="dots"></span>
+        </p>
+        <p id="delay-msg" class="loading-delay-msg">
+            La página se está cargando en segundo plano. <br>Gracias por tu paciencia.
+        </p>
+    </div>
+
+    <!-- ===== ENCABEZADO ===== -->
+    <header class="bg-white/80 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-10">
+        <div class="container mx-auto px-4 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <span class="text-2xl font-serif font-bold text-aspire-red">Aspire</span>
+                <span class="text-[8px] font-bold tracking-[0.3em] text-aspire-slate uppercase">Institute</span>
+            </a>
+            <a href="./index.html" target="_blank" class="text-xs text-aspire-slate hover:text-aspire-red transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left"></i> Volver al sitio
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="py-12 md:py-16">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Cabecera -->
+                <div class="text-center mb-12">
+                    <span class="section-badge">Aspire Leaders Program</span>
+                    <h1 class="text-3xl md:text-5xl font-serif font-bold text-aspire-charcoal mt-3 leading-tight">
+                        Plan de estudios <br class="sm:hidden" />
+                        <span class="text-aspire-red">2026</span>
+                    </h1>
+                   
+                </div>
+
+                <!-- Visión general -->
+                <div class="card-premium p-6 md:p-8 mb-10 flex flex-col md:flex-row items-center gap-6 fade-up visible">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fa-regular fa-clock text-aspire-red text-xl"></i>
+                            <span class="font-bold text-aspire-charcoal">Duración: 6 semanas</span>
+                        </div>
+                        <p class="text-sm text-aspire-slate leading-relaxed">
+                            A partir de la Cohort 4, el programa combina <strong>aprendizaje a tu propio ritmo</strong> (contenido asincrónico) y 
+                            <strong>sesiones en vivo</strong> con mentores y expertos internacionales. 
+                            El programa está diseñado para desarrollar habilidades concretas de liderazgo y pensamiento crítico.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-end shrink-0">
+                        <span class="bg-aspire-red/10 text-aspire-red px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">100% Online</span>
+                        <span class="bg-aspire-gold/20 text-yellow-700 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">100% Gratuito</span>
+                        <span class="bg-aspire-green/10 text-aspire-green px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider">A tu ritmo</span>
+                    </div>
+                </div>
+
+                <!-- Tarjetas: Core Topics, Program Activities, Immersive Learning -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Core Topics -->
+                    <div class="card-premium p-6 card-hover fade-up fade-up-delay-1">
+                        <div class="card-top-line"></div>
+                        <div class="mt-2">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fa-solid fa-graduation-cap text-aspire-red text-lg"></i>
+                                <span class="text-xs font-bold text-aspire-red uppercase tracking-wider">Temas centrales</span>
+                            </div>
+                            <h2 class="text-xl font-serif font-bold text-aspire-charcoal mb-1">Liderazgo personal e institucional</h2>
+                            <p class="text-xs text-aspire-slate italic mb-3">Diseñado por profesores de la Universidad de Harvard</p>
+                            <ul class="text-sm text-aspire-slate space-y-1.5 list-disc list-inside marker:text-aspire-red/70">
+                                <li>Fundamentos del liderazgo personal</li>
+                                <li>Mentalidad de crecimiento y construcción de tu práctica de liderazgo</li>
+                                <li>Fundamentos del liderazgo en instituciones: abordando desafíos y oportunidades</li>
+                                <li>Definiendo el problema: contexto y confianza</li>
+                                <li>Diseñando soluciones: transformaciones digitales e inteligencia artificial</li>
+                                <li>Sosteniendo el éxito</li>
+                                <li>Comunicación con impacto</li>
+                                <li>Liderazgo en espacios profesionales</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Program Activities -->
+                    <div class="card-premium p-6 card-hover fade-up fade-up-delay-2">
+                        <div class="card-top-line gold"></div>
+                        <div class="mt-2">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fa-solid fa-users-gear text-yellow-700 text-lg"></i>
+                                <span class="text-xs font-bold text-yellow-700 uppercase tracking-wider">Actividades del programa</span>
+                            </div>
+                            <h2 class="text-xl font-serif font-bold text-aspire-charcoal mb-1">Aprendizaje colaborativo</h2>
+                            <p class="text-xs text-aspire-slate italic mb-3">Con una cohorte global de pares</p>
+                            <ul class="text-sm text-aspire-slate space-y-1.5 list-disc list-inside marker:text-aspire-gold/70">
+                                <li>Participa y colabora con una cohorte global de compañeros</li>
+                                <li>Realiza una evaluación de habilidades de liderazgo basada en fortalezas</li>
+                                <li>Accede a recursos de desarrollo profesional creados en conjunto con la Escuela de Negocios Harvard</li>
+                                <li>Comprende tu rol como líder en el contexto de tu comunidad</li>
+                                <li>Aprende a establecer metas académicas y profesionales utilizando el marco de objetivos SMART</li>
+                                <li>Explora estrategias para construir confianza</li>
+                                <li>Identifica un problema en tu comunidad y propón soluciones junto a tus compañeros</li>
+                                <li>Redacta una propuesta de proyecto bajo la guía del equipo de Aspire</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Immersive Learning -->
+                    <div class="card-premium p-6 card-hover fade-up fade-up-delay-3">
+                        <div class="card-top-line green"></div>
+                        <div class="mt-2">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="fa-solid fa-chalkboard-user text-green-600 text-lg"></i>
+                                <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Aprendizaje inmersivo</span>
+                            </div>
+                            <h2 class="text-xl font-serif font-bold text-aspire-charcoal mb-1">Masterclasses en vivo</h2>
+                            <p class="text-xs text-aspire-slate italic mb-3">Con educadores de clase mundial</p>
+                            <ul class="text-sm text-aspire-slate space-y-1.5 list-disc list-inside marker:text-green-600/70">
+                                <li>Sesiones en vivo de 90 minutos durante todo el programa</li>
+                                <li>Temas: salud pública, humanidades, STEM y más</li>
+                                <li>Sin conocimiento previo requerido</li>
+                                <li>Preguntas directas a expertos mundiales</li>
+                                <li>Oportunidad de crear redes de contacto globales</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA final -->
+                <div class="mt-12 text-center card-premium p-6 md:p-8 border border-aspire-red/10 bg-aspire-red/5 fade-up fade-up-delay-4">
+                    <p class="text-sm text-aspire-slate max-w-2xl mx-auto">
+                        <i class="fa-regular fa-circle-check text-aspire-red mr-1.5"></i>
+                        <strong>Evaluación final:</strong> Diseñarás una propuesta de proyecto de impacto social que incluya diagnóstico del problema, plan de acción y resultados esperados. Desarrollarás la capacidad de analizar problemas estructurales y pensar soluciones concretas desde tu contexto.
+                    </p>
+                    <div class="mt-4 flex flex-wrap justify-center gap-4">
+                        <a href="https://engage.aspireleaders.org/registration" target="_blank" class="bg-aspire-red hover:bg-aspire-redDark text-white px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-colors shadow-md inline-flex items-center gap-2">
+                            <i class="fa-regular fa-pen-to-square"></i> Postula ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== PIE DE PÁGINA ===== -->
+    <footer class="bg-aspire-charcoal text-white/60 border-t border-white/5 py-6">
+        <div class="container mx-auto px-4 lg:px-8 text-center text-xs">
+            <p>&copy; 2026 Aspire Institute Inc. · Este contenido es parte del programa Aspire Leaders Program.</p>
+            <p class="mt-1">
+                <a href="https://www.aspireinstitute.mx/" class="hover:text-white transition-colors">aspireinstitute.mx</a>
+                &middot;
+                <a href="mailto:mexico@aspireleaders.org" class="hover:text-white transition-colors">mexico@aspireleaders.org</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---- LOADING PAGE ----
+            const overlay = document.getElementById('loading-overlay');
+            const delayMsg = document.getElementById('delay-msg');
+
+            // Mostrar mensaje de "tardando" después de 3 segundos
+            const delayTimer = setTimeout(function() {
+                if (!overlay.classList.contains('hidden')) {
+                    delayMsg.classList.add('show');
+                }
+            }, 3000);
+
+            // Ocultar loading cuando todo esté cargado
+            window.addEventListener('load', function() {
+                clearTimeout(delayTimer);
+                overlay.classList.add('hidden');
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                }, 900);
+            });
+
+            // ---- ANIMACIONES FADE-UP (existentes) ----
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.fade-up').forEach(el => {
+                observer.observe(el);
+            });
+
+        })();
+    </script>
+</body>
+</html>
