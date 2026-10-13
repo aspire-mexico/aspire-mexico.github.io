@@ -382,10 +382,22 @@
             box-shadow: 0 4px 14px rgba(163, 32, 53, 0.10);
             transition: transform 0.25s, box-shadow 0.25s;
             position: relative; z-index: 3; flex-shrink: 0;
+            overflow: hidden;
         }
         .org-item .avatar:hover { transform: scale(1.05); box-shadow: 0 10px 28px rgba(163, 32, 53, 0.18); }
         .org-item .avatar.gold { border-color: var(--gold); color: var(--gold-dark); }
         .org-item .avatar.secondary { border-color: var(--ink-200); color: var(--ink-500); width: 3.8rem; height: 3.8rem; font-size: 1.3rem; }
+
+        /* FOTO dentro del avatar del organigrama: se adapta al círculo sin alterar el responsive */
+        .org-item .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            border-radius: inherit;
+            display: block;
+        }
+
         .org-item .nombre { font-weight: 700; font-size: 0.85rem; margin-top: 0.45rem; color: var(--ink-700); line-height: 1.2; white-space: nowrap; }
         .org-item .cargo { font-size: 0.65rem; color: var(--ink-500); line-height: 1.3; max-width: 110px; white-space: normal; }
         .org-nivel:first-child::after,
@@ -2792,24 +2804,24 @@
                 <div class="organigrama-wrapper">
                     <div class="org-nivel">
                         <div class="org-item">
-                            <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                            <div class="avatar"><img src="./gallery/ana.jpg" alt="Ana Flores" loading="lazy"></div>
                             <span class="nombre">Ana Flores</span>
                             <span class="cargo">Country Director</span>
                         </div>
                     </div>
                     <div class="org-nivel">
                         <div class="org-item">
-                            <div class="avatar gold"><i class="fa-solid fa-user-group"></i></div>
+                            <div class="avatar gold"><img src="./gallery/desiree.jpg" alt="Desiree Gaitán" loading="lazy"></div>
                             <span class="nombre">Desiree Gaitán</span>
                             <span class="cargo">Outreach, Retention, and Partnerships Coordinator</span>
                         </div>
                         <div class="org-item">
-                            <div class="avatar gold"><i class="fa-solid fa-user-cog"></i></div>
+                            <div class="avatar gold"><img src="./gallery/alma.jpg" alt="Alma García" loading="lazy"></div>
                             <span class="nombre">Alma García</span>
                             <span class="cargo">Volunteer and Communications Coordinator</span>
                         </div>
                         <div class="org-item">
-                            <div class="avatar gold"><i class="fa-solid fa-user-cog"></i></div>
+                            <div class="avatar gold"><img src="./gallery/alina.jpg" alt="Alina Aksiyote" loading="lazy"></div>
                             <span class="nombre">Alina Aksiyote</span>
                             <span class="cargo">Operations Coordinator</span>
                         </div>
